@@ -1,3 +1,4 @@
+import InventoryTable from "@/components/ui/InventoryTable";
 import { stackServerApp } from "@/stack";
 import { SignUp } from "@stackframe/stack";
 import React from "react";
@@ -8,7 +9,7 @@ async function page() {
   return (
     <>
       {user ? (
-        <h1>Inventory Tables</h1>
+        <InventoryTable></InventoryTable>
       ) : (
         <div className="flex justify-center mt-20 items-center">
           <SignUp />
