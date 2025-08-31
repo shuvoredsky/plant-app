@@ -4,6 +4,7 @@ import { stackServerApp } from "../stack";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import NavbarServer from "@/components/ui/NavbarServer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,16 +31,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      ><StackProvider app={stackServerApp}><StackTheme>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </StackTheme></StackProvider></body>
+      >
+        <StackProvider app={stackServerApp}>
+          <StackTheme>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NavbarServer />
+              {children}
+            </ThemeProvider>
+          </StackTheme>
+        </StackProvider>
+      </body>
     </html>
   );
 }

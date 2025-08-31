@@ -3,10 +3,29 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "./button";
-import { Ghost, HomeIcon, Menu, Sprout, X } from "lucide-react";
+import {
+  HomeIcon,
+  LogIn,
+  LogInIcon,
+  LogOut,
+  Menu,
+  Sprout,
+  X,
+} from "lucide-react";
 import ModeToggle from "../ModeToggle";
+import { UserButton } from "@stackframe/stack";
 
-function Navbar() {
+interface NavbarClientProps {
+  user: any;
+  app: any;
+  userProfile: any;
+}
+
+export default function NavbarClient({
+  user,
+  app,
+  userProfile,
+}: NavbarClientProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -40,6 +59,31 @@ function Navbar() {
             </Button>
 
             <ModeToggle />
+
+            {!user ? (
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 justify-start asChild"
+              >
+                <Link href={app.signIn} onClick={() => setIsOpen(false)}>
+                  <LogInIcon className="w-4 h-4" />
+                  <span className="hidden lg:inline">Sign In</span>
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-2 justify-start asChild"
+                >
+                  <Link href={app.signIn} onClick={() => setIsOpen(false)}>
+                    <LogOut className="w-4 h-4" />
+                    <span className="hidden lg:inline">Sign Out</span>
+                  </Link>
+                </Button>
+                <UserButton />
+              </>
+            )}
           </div>
 
           {/* Mobile Hamburger */}
@@ -80,14 +124,10 @@ function Navbar() {
               </Link>
             </Button>
 
-            <div className="pl-2">
-              <ModeToggle />
-            </div>
+            <ModeToggle />
           </div>
         )}
       </div>
     </nav>
   );
 }
-
-export default Navbar;
