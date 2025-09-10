@@ -73,3 +73,18 @@ export async function editPlant(id: string, data: Prisma.plantsUpdateInput) {
     throw error;
   }
 }
+
+export async function deletePlant(id: string) {
+  try {
+    const currentUserId = await getUserId();
+    if (!currentUserId) return;
+    const deletePlant = await prisma.plants.delete({
+      where: { id },
+    });
+    revalidatePath("/plants");
+    return deletePlant;
+  } catch (error) {
+    console.error("Error deleting plant", error);
+    throw error;
+  }
+}
