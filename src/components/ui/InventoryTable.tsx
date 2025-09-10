@@ -14,7 +14,7 @@ import { Combobox } from "./Combo-box";
 import { useState } from "react";
 import { getPlants } from "@/actions/plant.action";
 import { useRouter } from "next/navigation";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import CreateDialog from "./CreateDialog";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
