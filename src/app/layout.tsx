@@ -40,7 +40,9 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
+              {/* <Toaster/> */}
               <NavbarServer />
+
               {children}
             </ThemeProvider>
           </StackTheme>

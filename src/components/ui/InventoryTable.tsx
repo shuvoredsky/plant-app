@@ -15,7 +15,7 @@ import { useState } from "react";
 import { getPlants } from "@/actions/plant.action";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import CreateDialog from "./CreateDialog";
+import CreateDialog from "@/components/CreateDialog";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
 

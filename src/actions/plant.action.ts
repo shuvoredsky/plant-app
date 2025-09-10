@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { getUserId } from "./user.action";
 import { revalidatePath } from "next/cache";
+import { Prisma } from "@/generated/prisma";
 
 export async function getPlant(searchTerm?: String) {
   try {
@@ -31,8 +32,44 @@ export async function getPlant(searchTerm?: String) {
 }
 
 export async function getPlantById(id: string) {
-  // Example using Prisma; adjust based on your data layer
   return await prisma.plants.findUnique({
     where: { id },
   });
+}
+
+export async function createPlant(data: Prisma.plantsCreateInput) {
+  console.log("create plant");
+  console.log(data);
+  try {
+    const currentUserId = await getUserId();
+    if (!currentUserId) return;
+    const newPlant = await prisma.plants.create({
+      data: {
+        ...data,
+        userId: currentUserId,
+      },
+    });
+    revalidatePath("/plants");
+    return newPlant;
+  } catch (error) {
+    console.error("Error Creating Plant", error);
+    throw error;
+  }
+}
+
+export async function editPlant(id: string, data: Prisma.plantsUpdateInput) {
+  try {
+    const currentUserId = await getUserId();
+    const updatePlant = await prisma.plants.update({
+      where: { id },
+      data: {
+        ...data,
+        userId: currentUserId,
+      },
+    });
+    revalidatePath("/plants");
+  } catch (error) {
+    console.error("Error updating Plant", error);
+    throw error;
+  }
 }
