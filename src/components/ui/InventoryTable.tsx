@@ -16,8 +16,8 @@ import { getPlants } from "@/actions/plant.action";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import CreateDialog from "@/components/CreateDialog";
-import EditDialog from "./EditDialog";
-import DeleteDialog from "./DeleteDialog";
+import EditDialog from "@/components/EditDialog";
+import DeleteDialog from "@/components/DeleteDialog";
 
 type Plants = Awaited<ReturnType<typeof getPlants>>;
 

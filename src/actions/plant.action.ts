@@ -4,7 +4,7 @@ import { getUserId } from "./user.action";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "@/generated/prisma";
 
-export async function getPlant(searchTerm?: String) {
+export async function getPlants(searchTerm?: String) {
   try {
     const currentUserId = await getUserId();
 
